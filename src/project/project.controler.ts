@@ -30,7 +30,7 @@ async function findAll(req: Request, res: Response) {
 
     res
       .status(200)
-      .json({ message: 'found all projects', data: projects})
+      .json(projects)
   } catch(error: any) {
     res
       .status(500)
