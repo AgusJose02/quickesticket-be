@@ -45,7 +45,7 @@ async function findOne(req: Request, res: Response) {
 
     res
       .status(200)
-      .json({ message: 'found project', data: project})
+      .json(project)
   } catch(error: any) {
     res
       .status(500)
@@ -57,11 +57,13 @@ async function add(req: Request, res: Response) {
   try {
     const project = em.create(Project, req.body)
 
+    delete project.id; //elimino el id que viene desde el front
+
     await em.flush()
 
     res
       .status(201)
-      .json({ message: 'project created', data: project})
+      .json(project)
   } catch(error: any) {
     res
       .status(500)

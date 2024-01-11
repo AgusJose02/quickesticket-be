@@ -8,7 +8,7 @@ GET http://localhost:3000/api/projects
 
 ### obtener un project
 
-GET http://localhost:3000/api/projects/6
+GET http://localhost:3000/api/projects/1
 
 
 ### crear nuevo project
@@ -17,9 +17,9 @@ POST http://localhost:3000/api/projects
 Content-Type: application/json
 
 {
-  "name": "Aguas",
-  "description": "Empresa de Córdoba",
-  "wiki": "Esta es la wiki de aguas",
+  "name": "Distro",
+  "description": "Empresa del cuyo",
+  "wiki": "Esta es la wiki de Distro",
   "creation_date": "2023-12-02"
 }
 
@@ -46,7 +46,7 @@ Content-Type: application/json
 
 ### borrar un project
 
-DELETE http://localhost:3000/api/projects/6
+DELETE http://localhost:3000/api/projects/0
 
 
 ### dirección inexistente

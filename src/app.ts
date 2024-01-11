@@ -1,11 +1,17 @@
 import 'reflect-metadata'
 import express from 'express'
+import cors from 'cors'
 import { projectRouter } from './project/project.routes.js'
 import { orm, syncSchema } from './shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
 
+
 const app = express()
+
 app.use(express.json())
+// mw que permite comunicacion cliente-servidor
+app.use(cors())
+
 
 // luego de los middleware base
 
