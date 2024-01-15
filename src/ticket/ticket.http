@@ -1,0 +1,61 @@
+
+### obtener todos los project
+
+GET http://localhost:3000/api/my-page
+
+### obtener un project
+
+GET http://localhost:3000/api/projects/1
+
+
+### crear nuevo project
+
+POST http://localhost:3000/api/my-page
+Content-Type: application/json
+
+{
+  "project": 1,
+  "creator": 1,
+  "responsible": 1,
+  "beginning_date": "2023-12-02",
+  "end_date": "2023-12-02",
+  "state": 1,
+  "total_hours": 3.00,
+  "title": "Primer ticket",
+  "description": "Descripción del ticket"
+}
+
+### modificar un project con PUT (Idempotente y recurso completo)
+
+PUT http://localhost:3000/api/projects/2
+Content-Type: application/json
+
+{
+  "name": "Wiener",
+  "description": "Empresa de Rosario, Santa Fe",
+  "wiki": "Esta es la wiki",
+  "creation_date": "2023-12-03"
+}
+
+### modificar un project con PATCH (Recurso parcial)
+
+PATCH http://localhost:3000/api/projects/6
+Content-Type: application/json
+
+{
+  "wiki": "Esta es la wiki de Wiener"
+}
+
+### borrar un project
+
+DELETE http://localhost:3000/api/projects/0
+
+
+### dirección inexistente
+
+GET http://localhost:3000/api/projectss
+
+
+/// docker run --name quickesticket -e MYSQL_ROOT_HOST='%' -e MYSQL_ALLOW_EMPTY_PASSWORD="yes" -e MYSQL_PASSWORD="agus" -e MYSQL_USER="agus" -e MYSQL_DATABASE='quickesticket' -p 3307:3307 -d mysql
+
+/// docker run --name agus_mysql -e MYSQL_ROOT_HOST='%' -e MYSQL_ALLOW_EMPTY_PASSWORD="yes" -e MYSQL_PASSWORD="agus" -e MYSQL_USER="agus" -e MYSQL_DATABASE='quickesticket' -p 3306:3306 -d mysql

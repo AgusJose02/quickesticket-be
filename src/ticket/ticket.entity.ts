@@ -7,6 +7,12 @@ export class Ticket extends BaseEntity {
   @ManyToOne(() => Project, {nullable: false})
   project!: Rel<Project>
 
+  @Property()
+  creator!: number
+
+  @Property()
+  responsible!: number
+
   @Property({nullable: false})
   beginning_date!: string
 
@@ -14,7 +20,7 @@ export class Ticket extends BaseEntity {
   end_date!: string
 
   @Property()
-  state!: string
+  state!: number
 
   @Property()
   total_hours!: number
