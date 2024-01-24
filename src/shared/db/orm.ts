@@ -15,6 +15,7 @@ export const orm = await MikroORM.init({
     createForeignKeyConstraints: true,
     ignoreSchema: []
   }
+
 })
 
 export const syncSchema = async () => {
