@@ -27,7 +27,11 @@ function sanitizeProjectInput(req: Request, res: Response, next: NextFunction){
 
 async function findAll(req: Request, res: Response) {
   try {
-    const projects = await em.find(Project, {})
+    const projects = await em.find(
+      Project,
+      {},
+      { populate: ['tickets']}
+    )
 
     res
       .status(200)
@@ -42,7 +46,11 @@ async function findAll(req: Request, res: Response) {
 async function findOne(req: Request, res: Response) {
   try {
     const id = Number.parseInt(req.params.id)
-    const project = await em.findOneOrFail(Project, { id })
+    const project = await em.findOneOrFail(
+      Project,
+      { id },
+      { populate: ['tickets']}
+    )
 
     res
       .status(200)
