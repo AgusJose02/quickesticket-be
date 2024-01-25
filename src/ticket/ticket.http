@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ### borrar un project
 
-DELETE http://localhost:3000/api/my-page/3
+DELETE http://localhost:3000/api/my-page/6
 
 
 ### dirección inexistente

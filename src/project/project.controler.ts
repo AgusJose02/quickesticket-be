@@ -30,7 +30,7 @@ async function findAll(req: Request, res: Response) {
     const projects = await em.find(
       Project,
       {},
-      { populate: ['tickets']}
+      { populate: []}
     )
 
     res
@@ -49,7 +49,7 @@ async function findOne(req: Request, res: Response) {
     const project = await em.findOneOrFail(
       Project,
       { id },
-      { populate: ['tickets']}
+      { populate: ['tickets', 'tickets.state']}
     )
 
     res

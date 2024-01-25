@@ -11,7 +11,7 @@ async function findAll(req: Request, res: Response) {
     const tickets = await em.find(
       Ticket,
       {},
-      { populate: ['project']}
+      { populate: ['project', 'state']}
     )
 
     res.status(200).json({ message: 'Finded all tickets', data: tickets})

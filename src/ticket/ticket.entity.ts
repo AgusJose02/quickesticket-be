@@ -1,6 +1,7 @@
-import { DateType, Entity, ManyToOne, Property, Rel } from "@mikro-orm/core";
+import { Entity, ManyToOne, Property, Rel } from "@mikro-orm/core";
 import { BaseEntity } from "../shared/base.entity.js";
 import { Project } from "../project/project.entity.js";
+import { TicketState } from "./ticket-state.entity.js";
 
 @Entity()
 export class Ticket extends BaseEntity {
@@ -19,8 +20,8 @@ export class Ticket extends BaseEntity {
   @Property({nullable: true, columnType: 'date'})
   end_date!: string
 
-  @Property()
-  state!: number
+  @ManyToOne(() => TicketState, {nullable: false})
+  state!: Rel<TicketState>
 
   @Property({nullable: true})
   total_hours!: number
