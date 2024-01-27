@@ -1,0 +1,46 @@
+
+### obtener todos los project
+
+GET http://localhost:3000/api/my-page
+
+### obtener un project
+
+GET http://localhost:3000/api/my-page/2
+
+
+### crear nuevo project
+
+POST http://localhost:3000/api/my-page
+Content-Type: application/json
+
+{
+  "project": 1,
+  "creator": 2,
+  "beginning_date": "2024-01-24",
+  "state": 1,
+  "title": "Segundo ticket",
+  "description": "Descripción del segundo ticket"
+}
+
+### modificar un ticket con PUT
+
+PUT http://localhost:3000/api/my-page/2
+Content-Type: application/json
+
+{
+  "description": "Descripción modificada del ticket"
+}
+
+### borrar un project
+
+DELETE http://localhost:3000/api/my-page/6
+
+
+### dirección inexistente
+
+GET http://localhost:3000/api/projectss
+
+
+/// docker run --name quickesticket -e MYSQL_ROOT_HOST='%' -e MYSQL_ALLOW_EMPTY_PASSWORD="yes" -e MYSQL_PASSWORD="agus" -e MYSQL_USER="agus" -e MYSQL_DATABASE='quickesticket' -p 3307:3307 -d mysql
+
+/// docker run --name agus_mysql -e MYSQL_ROOT_HOST='%' -e MYSQL_ALLOW_EMPTY_PASSWORD="yes" -e MYSQL_PASSWORD="agus" -e MYSQL_USER="agus" -e MYSQL_DATABASE='quickesticket' -p 3306:3306 -d mysql

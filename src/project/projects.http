@@ -46,7 +46,7 @@ Content-Type: application/json
 
 ### borrar un project
 
-DELETE http://localhost:3000/api/projects/0
+DELETE http://localhost:3000/api/projects/1
 
 
 ### dirección inexistente

@@ -1,27 +1,34 @@
 import { Entity, ManyToOne, Property, Rel } from "@mikro-orm/core";
 import { BaseEntity } from "../shared/base.entity.js";
 import { Project } from "../project/project.entity.js";
+import { TicketState } from "./ticket-state.entity.js";
 
 @Entity()
 export class Ticket extends BaseEntity {
   @ManyToOne(() => Project, {nullable: false})
   project!: Rel<Project>
 
-  @Property({nullable: false})
+  @Property()
+  creator!: number
+
+  @Property({nullable: true})
+  responsible!: number
+
+  @Property({nullable: false, columnType: 'date'})
   beginning_date!: string
 
-  @Property()
+  @Property({nullable: true, columnType: 'date'})
   end_date!: string
 
-  @Property()
-  state!: string
+  @ManyToOne(() => TicketState, {nullable: false})
+  state!: Rel<TicketState>
 
-  @Property()
+  @Property({nullable: true})
   total_hours!: number
 
   @Property({nullable: false})
   title!: string
 
-  @Property()
+  @Property({nullable: true})
   description!: string
 }
