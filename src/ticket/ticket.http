@@ -1,14 +1,14 @@
 
-### obtener todos los project
+### obtener todos los ticket
 
-GET http://localhost:3000/api/my-page
+GET http://localhost:3000/api/tickets
 
-### obtener un project
+### obtener un ticket
 
-GET http://localhost:3000/api/my-page/2
+GET http://localhost:3000/api/tickets/5
 
 
-### crear nuevo project
+### crear nuevo ticket
 
 POST http://localhost:3000/api/my-page
 Content-Type: application/json
@@ -31,15 +31,13 @@ Content-Type: application/json
   "description": "Descripción modificada del ticket"
 }
 
-### borrar un project
+### borrar un ticket
 
 DELETE http://localhost:3000/api/my-page/6
 
+### obtener todos los ticket states
 
-### dirección inexistente
-
-GET http://localhost:3000/api/projectss
-
+GET http://localhost:3000/api/ticket-states
 
 /// docker run --name quickesticket -e MYSQL_ROOT_HOST='%' -e MYSQL_ALLOW_EMPTY_PASSWORD="yes" -e MYSQL_PASSWORD="agus" -e MYSQL_USER="agus" -e MYSQL_DATABASE='quickesticket' -p 3307:3307 -d mysql
 
