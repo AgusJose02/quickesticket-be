@@ -14,7 +14,9 @@ async function findAll(req: Request, res: Response) {
       { populate: ['project', 'state']}
     )
 
-    res.status(200).json({ message: 'Finded all tickets', data: tickets})
+    res
+      .status(200)
+      .json(tickets)
   } catch (error: any) {
     res.status(500).json({ message: error.message})
   }
@@ -23,7 +25,10 @@ async function findAll(req: Request, res: Response) {
 async function findOne(req: Request, res: Response) {
   try {
     const id = Number.parseInt(req.params.id)
-    const ticket = await em.findOneOrFail(Ticket, { id })
+    const ticket = await em.findOneOrFail(Ticket,
+      { id },
+      { populate: ['project', 'state']}
+    )
 
     res
       .status(200)
@@ -39,13 +44,17 @@ async function add(req: Request, res: Response) {
   try {
     const ticket = em.create(Ticket, req.body)
 
+    delete ticket.id; //elimino el id que viene desde el front
+
     await em.flush()
 
     res
       .status(201)
-      .json({ message: 'Ticket created', data: ticket })
+      .json(ticket)
   } catch (error: any) {
-    res.status(500).json({ message: error.message })
+    res
+      .status(500)
+      .json({ message: error.message })
   }
 }
 

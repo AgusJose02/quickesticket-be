@@ -6,6 +6,7 @@ import { orm, syncSchema } from './shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
 import { ticketRouter } from './ticket/ticket.routes.js'
 import { projectRouter } from './project/project.routes.js'
+import { ticketStateRouter } from './ticket/ticket-state.routes.js'
 
 
 const app = express()
@@ -25,7 +26,8 @@ app.use((req, res, next) => {
 // antes de los middleware de negocio
 
 app.use('/api/projects', projectRouter)
-app.use('/api/my-page', ticketRouter)
+app.use('/api/tickets', ticketRouter)
+app.use('/api/ticket-states', ticketStateRouter)
 
 /// MIDDLEWARE PARA DIRECCIONES INEXISTENTES
 app.use((_, res) => {
