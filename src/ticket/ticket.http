@@ -10,16 +10,16 @@ GET http://localhost:3000/api/tickets/5
 
 ### crear nuevo ticket
 
-POST http://localhost:3000/api/my-page
+POST http://localhost:3000/api/tickets
 Content-Type: application/json
 
 {
   "project": 1,
   "creator": 2,
   "beginning_date": "2024-01-24",
-  "state": 1,
-  "title": "Segundo ticket",
-  "description": "Descripción del segundo ticket"
+  "state": 4,
+  "title": "Sanitized ticket",
+  "description": "Descripción del ticket sanitizado"
 }
 
 ### modificar un ticket con PUT

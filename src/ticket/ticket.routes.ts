@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { findAll, findOne, add, update, remove  } from "./ticket.controler.js";
+import { sanitizeTicketInput, findAll, findOne, add, update, remove  } from "./ticket.controler.js";
 
 export const ticketRouter = Router()
 
@@ -10,10 +10,10 @@ ticketRouter.get('/', findAll)
 ticketRouter.get('/:id', findOne)
 
 /// POST
-ticketRouter.post('/', add)
+ticketRouter.post('/', sanitizeTicketInput, add)
 
 /// PUT
-ticketRouter.put('/:id', update)
+ticketRouter.put('/:id', update) // TODO: INCLUIR SANITIZED
 
 /// DELETE
-ticketRouter.delete('/:id', remove)
+ticketRouter.delete('/:id', remove) // TODO: INCLUIR SANITIZED

@@ -6,6 +6,7 @@ import { TicketState } from "./ticket-state.entity.js";
 
 const em = orm.em
 
+
 async function findAll(req: Request, res: Response) {
   try {
     const ticketStates = await em.find(
