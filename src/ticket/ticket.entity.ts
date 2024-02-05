@@ -1,7 +1,8 @@
-import { Entity, ManyToOne, Property, Rel } from "@mikro-orm/core";
+import { Cascade, Collection, DateTimeType, Entity, ManyToOne, OneToMany, Property, Rel } from "@mikro-orm/core";
 import { BaseEntity } from "../shared/base.entity.js";
 import { Project } from "../project/project.entity.js";
-import { TicketState } from "./ticket-state.entity.js";
+import { TicketState } from "./ticket-state/ticket-state.entity.js";
+import { DevotedTime } from "./devoted-time/devoted-time.entity.js";
 
 @Entity()
 export class Ticket extends BaseEntity {
@@ -14,11 +15,11 @@ export class Ticket extends BaseEntity {
   @Property({nullable: true})
   responsible!: number
 
-  @Property({nullable: false, columnType: 'date'})
-  beginning_date!: string
+  @Property({nullable: false,})
+  beginning_date!: Date
 
-  @Property({nullable: true, columnType: 'date'})
-  end_date!: string
+  @Property({nullable: true})
+  end_date!: Date
 
   @ManyToOne(() => TicketState, {nullable: false})
   state!: Rel<TicketState>
@@ -31,4 +32,9 @@ export class Ticket extends BaseEntity {
 
   @Property({nullable: true})
   description!: string
+
+  @OneToMany(() => DevotedTime, (devotedTime) => devotedTime.ticket,
+    { cascade: [Cascade.ALL]}
+  )
+  devotedTimes= new Collection<DevotedTime>(this)
 }

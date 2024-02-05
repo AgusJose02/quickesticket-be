@@ -1,6 +1,6 @@
 import { Cascade, Collection, Entity, OneToMany, Property } from "@mikro-orm/core";
-import { BaseEntity } from "../shared/base.entity.js";
-import { Ticket } from "./ticket.entity.js";
+import { BaseEntity } from "../../shared/base.entity.js";
+import { Ticket } from "../ticket.entity.js";
 
 @Entity()
 export class TicketState extends BaseEntity {

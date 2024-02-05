@@ -1,0 +1,35 @@
+### obtener todos los tiempos
+
+GET http://localhost:3000/api/devoted-time
+
+### obtener todo el tiempo dedicado de un ticket 
+
+GET http://localhost:3000/api/tickets/4/devoted-time
+
+### obtener tiempo dedicado
+
+GET http://localhost:3000/api/tickets/4/devoted-time/1
+
+### crear nuevo tiempo dedicado
+
+POST http://localhost:3000/api/tickets/25/devoted-time
+Content-Type: application/json
+
+{
+  "ticket": 25,
+  "date": "2024-01-01T00:00:00",
+  "amount": 4
+}
+
+### modificar tiempo dedicado
+
+PUT http://localhost:3000/api/tickets/4/devoted-time/1
+Content-Type: application/json
+
+{
+  "description": "Nueva descripción para el ticket 2"
+}
+
+### borrar tiempo dedicado
+
+DELETE http://localhost:3000/api/tickets/4/devoted-time/1

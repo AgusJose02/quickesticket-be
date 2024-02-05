@@ -6,7 +6,8 @@ import { orm, syncSchema } from './shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
 import { ticketRouter } from './ticket/ticket.routes.js'
 import { projectRouter } from './project/project.routes.js'
-import { ticketStateRouter } from './ticket/ticket-state.routes.js'
+import { ticketStateRouter } from './ticket/ticket-state/ticket-state.routes.js'
+import { devotedTimeRouter } from './ticket/devoted-time/devoted-time.routes.js'
 
 
 const app = express()
@@ -28,6 +29,9 @@ app.use((req, res, next) => {
 app.use('/api/projects', projectRouter)
 app.use('/api/tickets', ticketRouter)
 app.use('/api/ticket-states', ticketStateRouter)
+app.use('/api/devoted-time', devotedTimeRouter)
+app.use('/api/tickets', devotedTimeRouter)
+
 
 /// MIDDLEWARE PARA DIRECCIONES INEXISTENTES
 app.use((_, res) => {

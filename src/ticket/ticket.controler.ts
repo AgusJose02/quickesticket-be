@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 
-import { orm } from '../shared/db/orm.js'
+import { entityManager } from '../shared/db/orm.js'
 import { Ticket } from "./ticket.entity.js";
 
 
-const em = orm.em
+const em = entityManager;
 
 /// SANITIZE INPUT
 
@@ -70,8 +70,8 @@ async function add(req: Request, res: Response) {
     const ticket = em.create(Ticket, req.body);
 
     delete ticket.id; //elimino el id que viene desde el front
-    ticket.beginning_date = ticket.beginning_date.slice(0,10); // el front envia fecha y hora
-    ticket.end_date = ticket.end_date.slice(0,10);
+    // ticket.beginning_date = ticket.beginning_date.slice(0,10); // el front envia fecha y hora
+    // ticket.end_date = ticket.end_date.slice(0,10);
 
     await em.flush()
 

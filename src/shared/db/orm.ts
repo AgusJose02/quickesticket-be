@@ -1,6 +1,6 @@
-import { MikroORM } from "@mikro-orm/core";
+import { MikroORM, EntityLoader } from "@mikro-orm/core";
+import { EntityManager } from "@mikro-orm/mysql";
 import { SqlHighlighter } from "@mikro-orm/sql-highlighter";
-import exp from "constants";
 
 export const orm = await MikroORM.init({
   entities: ['dist/**/*.entity.js'],
@@ -10,6 +10,7 @@ export const orm = await MikroORM.init({
   clientUrl: 'mysql://agus:agus@localhost:3307/quickesticket',
   highlighter: new SqlHighlighter(),
   debug: true,
+  allowGlobalContext: true,
   schemaGenerator: {
     disableForeignKeys: true,
     createForeignKeyConstraints: true,
@@ -17,6 +18,9 @@ export const orm = await MikroORM.init({
   }
 
 })
+
+export const entityManager = orm.em as EntityManager;
+export const entityLoader = new EntityLoader(orm.em);
 
 export const syncSchema = async () => {
   const generator = orm.getSchemaGenerator()

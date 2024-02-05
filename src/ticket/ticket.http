@@ -7,19 +7,18 @@ GET http://localhost:3000/api/tickets
 
 GET http://localhost:3000/api/tickets/5
 
-
 ### crear nuevo ticket
 
 POST http://localhost:3000/api/tickets
 Content-Type: application/json
 
 {
-  "project": 1,
+  "project": 2,
   "creator": 2,
   "beginning_date": "2024-01-24",
   "state": 4,
-  "title": "Sanitized ticket",
-  "description": "Descripción del ticket sanitizado"
+  "title": "Anda esto?",
+  "description": ""
 }
 
 ### modificar un ticket con PUT
@@ -33,9 +32,9 @@ Content-Type: application/json
 
 ### borrar un ticket
 
-DELETE http://localhost:3000/api/my-page/6
+DELETE http://localhost:3000/api/tickets/26
 
-### obtener todos los ticket states
+### obtener todos los ticket stat2s
 
 GET http://localhost:3000/api/ticket-states
 

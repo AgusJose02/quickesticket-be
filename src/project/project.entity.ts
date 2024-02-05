@@ -20,5 +20,5 @@ export class Project extends BaseEntity {
   @OneToMany(() => Ticket, (ticket) => ticket.project,
     { cascade: [Cascade.ALL] }
   )
-    tickets= new Collection<Ticket>(this)
+  tickets= new Collection<Ticket>(this)
 }

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 
-import { orm } from '../shared/db/orm.js'
+import { entityManager } from '../shared/db/orm.js'
 import { Project } from './project.entity.js'
 
-const em = orm.em
+const em = entityManager;
 
 /// SANITIZE INPUT
 

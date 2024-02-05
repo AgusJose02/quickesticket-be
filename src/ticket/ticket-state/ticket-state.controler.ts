@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
-import { orm } from '../shared/db/orm.js'
+import { entityManager } from '../../shared/db/orm.js'
 import { TicketState } from "./ticket-state.entity.js";
 
 
-const em = orm.em
+const em = entityManager;
 
 
 async function findAll(req: Request, res: Response) {
