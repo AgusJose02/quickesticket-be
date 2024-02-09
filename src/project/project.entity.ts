@@ -8,14 +8,14 @@ export class Project extends BaseEntity {
   @Property({nullable: false, unique: true})
   name!: string
 
-  @Property({nullable: true})
+  @Property({nullable: true, columnType: 'varchar(75)'})
   description!: string
 
-  @Property()
+  @Property({nullable: true, columnType: 'VARCHAR(255)'})
   wiki!: string
 
-  @Property()
-  creation_date!: string
+  @Property({nullable: false})
+  creation_date!: Date
 
   @OneToMany(() => Ticket, (ticket) => ticket.project,
     { cascade: [Cascade.ALL] }

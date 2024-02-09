@@ -5,7 +5,7 @@ import { Ticket } from "../ticket.entity.js";
 @Entity()
 export class DevotedTime extends BaseEntity {
 
-  @ManyToOne(() => Ticket, { nullable: false })
+  @ManyToOne(() => Ticket, { nullable: false, onDelete: 'cascade' })
   ticket!: Rel<Ticket>
   
   @Property({nullable: false, columnType: 'date'})
