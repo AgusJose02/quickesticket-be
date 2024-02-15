@@ -15,10 +15,10 @@ export class Ticket extends BaseEntity {
   @Property({nullable: true})
   responsible!: number
 
-  @Property({nullable: false,})
+  @Property({nullable: false, columnType: 'date'})
   beginning_date!: Date
 
-  @Property({nullable: true})
+  @Property({nullable: true, columnType: 'date'})
   end_date!: Date
 
   @ManyToOne(() => TicketState, {nullable: false})
@@ -27,10 +27,10 @@ export class Ticket extends BaseEntity {
   @Property({nullable: true})
   total_hours!: number
 
-  @Property({nullable: false})
+  @Property({nullable: false, columnType: 'varchar(75)'})
   title!: string
 
-  @Property({nullable: true})
+  @Property({nullable: true, columnType: 'text'})
   description!: string
 
   @OneToMany(() => DevotedTime, (devotedTime) => devotedTime.ticket,

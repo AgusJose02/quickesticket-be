@@ -5,16 +5,16 @@ import { Ticket } from "../ticket/ticket.entity.js";
 @Entity()
 export class Project extends BaseEntity {
 
-  @Property({nullable: false, unique: true})
+  @Property({nullable: false, unique: true, columnType: 'varchar(25)'})
   name!: string
 
   @Property({nullable: true, columnType: 'varchar(75)'})
   description!: string
 
-  @Property({nullable: true, columnType: 'VARCHAR(255)'})
+  @Property({nullable: true, columnType: 'text'})
   wiki!: string
 
-  @Property({nullable: false})
+  @Property({nullable: false, columnType: 'date'})
   creation_date!: Date
 
   @OneToMany(() => Ticket, (ticket) => ticket.project,

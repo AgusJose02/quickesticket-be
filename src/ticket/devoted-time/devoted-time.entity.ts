@@ -14,7 +14,7 @@ export class DevotedTime extends BaseEntity {
   @Property({nullable: false, columnType: 'integer'}) //TODO: AVERIGUAR COMO MANEJAR DECIMALS PORQUE DEVUELVE STRINGS
   amount!: number
 
-  @Property({nullable: true})
+  @Property({nullable: true, columnType: 'varchar(75)'})
   description!: string
 
   @Property({nullable: true, columnType: 'integer'}) //TODO: AVERIGUAR COMO MANEJAR DECIMALS PORQUE DEVUELVE STRINGS
