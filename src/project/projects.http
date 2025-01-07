@@ -5,10 +5,13 @@
 ### obtener todos los project
 
 GET http://localhost:3000/api/projects
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzYyNjQ0OTB9.pgE02LOM24bYY7ZsXDafZTW-NR4UJONE2A6-G5hP9vs
+
 
 ### obtener un project
 
 GET http://localhost:3000/api/projects/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzYyNjQ0OTB9.pgE02LOM24bYY7ZsXDafZTW-NR4UJONE2A6-G5hP9vc
 
 
 ### crear nuevo project
