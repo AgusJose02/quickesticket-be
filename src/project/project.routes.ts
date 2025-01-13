@@ -5,19 +5,45 @@ import { validateToken } from "../token-validation.js";
 export const projectRouter = Router()
 
 /// GET ALL
-projectRouter.get('/', validateToken, findAll)
+projectRouter.get(
+  '/',
+  validateToken,
+  findAll
+)
 
 /// GET ONE
-projectRouter.get('/:id',validateToken, findOne)
+projectRouter.get(
+  '/:id',
+  validateToken,
+  findOne
+)
 
 /// POST
-projectRouter.post('/', sanitizeProjectInput, add)
+projectRouter.post(
+  '/',
+  validateToken,
+  sanitizeProjectInput,
+  add
+)
 
 /// PUT
-projectRouter.put('/:id', sanitizeProjectInput, update)
+projectRouter.put(
+  '/:id',
+  validateToken,
+  sanitizeProjectInput,
+  update)
 
 /// PATCH
-projectRouter.patch('/:id', sanitizeProjectInput, update)
+projectRouter.patch(
+  '/:id',
+  validateToken,
+  sanitizeProjectInput,
+  update
+)
 
 /// DELETE
-projectRouter.delete('/:id', remove)
+projectRouter.delete(
+  '/:id',
+  validateToken,
+  remove
+)

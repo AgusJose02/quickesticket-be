@@ -1,35 +1,43 @@
 ### obtener todos los tiempos
 
 GET http://localhost:3000/api/devoted-time
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
 
 ### obtener todo el tiempo dedicado de un ticket 
 
-GET http://localhost:3000/api/tickets/4/devoted-time
+GET http://localhost:3000/api/tickets/61/devoted-time
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+
 
 ### obtener tiempo dedicado
 
-GET http://localhost:3000/api/tickets/4/devoted-time/1
+GET http://localhost:3000/api/tickets/61/devoted-time/15
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+
 
 ### crear nuevo tiempo dedicado
 
-POST http://localhost:3000/api/tickets/25/devoted-time
+POST http://localhost:3000/api/tickets/61/devoted-time
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
 
 {
-  "ticket": 25,
-  "date": "2024-01-01T00:00:00",
-  "amount": 4
+  "ticket": 61,
+  "date": "2025-01-13T00:00:00",
+  "amount": 2
 }
 
 ### modificar tiempo dedicado
 
-PUT http://localhost:3000/api/tickets/4/devoted-time/1
+PUT http://localhost:3000/api/tickets/61/devoted-time/23
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
 
 {
-  "description": "Nueva descripción para el ticket 2"
+  "description": "Nueva descripción para el ticket 23"
 }
 
 ### borrar tiempo dedicado
 
-DELETE http://localhost:3000/api/tickets/4/devoted-time/1
+DELETE http://localhost:3000/api/tickets/61/devoted-time/13
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA

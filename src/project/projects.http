@@ -5,37 +5,40 @@
 ### obtener todos los project
 
 GET http://localhost:3000/api/projects
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzYyNjQ0OTB9.pgE02LOM24bYY7ZsXDafZTW-NR4UJONE2A6-G5hP9vs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzY1MjR9.0ZyOZYWTpuwK-XyeUvkLAZUloNewlX6T4O8zA9Bj-8k
 
 
 ### obtener un project
 
 GET http://localhost:3000/api/projects/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzYyNjQ0OTB9.pgE02LOM24bYY7ZsXDafZTW-NR4UJONE2A6-G5hP9vc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY0NDUwMTR9.E_I1cI_Ss7GaeURmATd9Tok9n_qIhctbUuGS425Bt0w
 
 
 ### crear nuevo project
 
 POST http://localhost:3000/api/projects
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzY1MjR9.0ZyOZYWTpuwK-XyeUvkLAZUloNewlX6T4O8zA9Bj-8k
 
 {
-  "name": "Distro",
+  "name": "Los jose",
   "description": "Empresa del cuyo",
-  "wiki": "Esta es la wiki de Distro",
-  "creation_date": "2023-12-02"
+  "wiki": "",
+  "creation_date": "2025-01-13"
 }
 
 ### modificar un project con PUT (Idempotente y recurso completo)
 
-PUT http://localhost:3000/api/projects/2
+PUT http://localhost:3000/api/projects/14
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzY1MjR9.0ZyOZYWTpuwK-XyeUvkLAZUloNewlX6T4O8zA9Bj-8k
+
 
 {
-  "name": "Wiener",
+  "name": "Familia Jose",
   "description": "Empresa de Rosario, Santa Fe",
   "wiki": "Esta es la wiki",
-  "creation_date": "2023-12-03"
+  "creation_date": "2025-01-13"
 }
 
 ### modificar un project con PATCH (Recurso parcial)
@@ -49,7 +52,9 @@ Content-Type: application/json
 
 ### borrar un project
 
-DELETE http://localhost:3000/api/projects/1
+DELETE http://localhost:3000/api/projects/14
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzY1MjR9.0ZyOZYWTpuwK-XyeUvkLAZUloNewlX6T4O8zA9Bj-8k
+
 
 
 ### dirección inexistente

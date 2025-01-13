@@ -37,7 +37,7 @@ async function add(req: Request, res: Response) {
 
   if (user) {
     return res.status(400).json({
-      msg: `Ya existe el usuario ${username}.`
+      msg: `El usuario ${username} ya existe.`
     })
   }
 
@@ -89,7 +89,7 @@ async function login(req: Request, res: Response) {
     process.env.KEY || 'gael1222'
   )
 
-  res.json({token})
+  res.json(token)
 }
 
 
