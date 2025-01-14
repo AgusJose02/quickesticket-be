@@ -85,7 +85,11 @@ async function login(req: Request, res: Response) {
 
   //Generación del token
   const token = jwt.sign(
-    {username: username},
+    {
+      id: user.id,
+      username: username,
+      isAdmin: user.is_admin
+    },
     process.env.KEY || 'gael1222'
   )
 

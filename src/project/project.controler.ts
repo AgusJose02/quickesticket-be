@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
-
 import { entityManager } from '../shared/db/orm.js'
+
 import { Project } from './project.entity.js'
+import { decodeToken } from '../token-decoder.js';
+
 
 const em = entityManager;
 
@@ -27,15 +29,38 @@ function sanitizeProjectInput(req: Request, res: Response, next: NextFunction){
 
 async function findAll(req: Request, res: Response) {
   try {
-    const projects = await em.find(
-      Project,
-      {},
-      { populate: []}
-    )
+    const token = req.headers.authorization
 
-    res
-      .status(200)
-      .json(projects)
+    if (token) {
+      const { userId, userIsAdmin } = decodeToken(token)
+      let projects = []
+
+      if (userIsAdmin) {
+        // Caso para usuario admin
+        projects = await em.find(
+          Project,
+          {},
+          { populate: []}
+        )
+      } else {
+        // Caso para usuario no admin
+        projects = await em.find(
+          Project,
+          { users: {id: userId}},
+          { populate: []}
+        )
+      }
+      
+      res
+        .status(200)
+        .json(projects)
+
+    } else {
+      res.status(401).json({
+        msg: 'Acceso denegado.'
+      })   
+    }
+
   } catch(error: any) {
     res
       .status(500)
@@ -45,16 +70,47 @@ async function findAll(req: Request, res: Response) {
 
 async function findOne(req: Request, res: Response) {
   try {
-    const id = Number.parseInt(req.params.id)
-    const project = await em.findOneOrFail(
-      Project,
-      { id },
-      { populate: ['tickets', 'tickets.state']}
-    )
+    const token = req.headers.authorization
+    let project
+    
+    if (token) {
+      const { userId, userIsAdmin } = decodeToken(token)
+      const id = Number.parseInt(req.params.id)
+      await em.findOneOrFail(Project, { id }) // Valido que el proyecto exista
+      
+      if (userIsAdmin) {
+        // Caso para usuario admin
+        project = await em.findOneOrFail(
+          Project,
+          { id },
+          { populate: ['tickets', 'tickets.state']}
+        )
+        
+      } else {
+        // Caso para usuario no admin
+        project = await em.findOne(
+          Project,
+          { id, users: { id: userId } },
+          { populate: ['tickets', 'tickets.state'] }
+        );
+        
+        if (!project) {
+          res.status(403).json({
+            message: 'Acceso al proyecto denegado.'
+          })
+          return
+        }
+      }
 
-    res
-      .status(200)
-      .json(project)
+      res
+        .status(200)
+        .json(project)
+    } else {
+      res.status(401).json({
+        msg: 'Acceso denegado.'
+      })
+    }
+    
   } catch(error: any) {
     res
       .status(500)
@@ -64,15 +120,33 @@ async function findOne(req: Request, res: Response) {
 
 async function add(req: Request, res: Response) {
   try {
-    const project = em.create(Project, req.body)
+    const token = req.headers.authorization
+    
+    if (token) {
+      const { userIsAdmin } = decodeToken(token)
+      
+      if (userIsAdmin) {
+        const project = em.create(Project, req.body)
+    
+        delete project.id; //elimino el id que viene desde el front
+    
+        await em.flush()
+    
+        res
+          .status(201)
+          .json(project)
+      } else {
+        res.status(403).json({
+          message: 'No posee los permisos necesarios para crear un proyecto.'
+        })
+      }
 
-    delete project.id; //elimino el id que viene desde el front
-
-    await em.flush()
-
-    res
-      .status(201)
-      .json(project)
+    } else {
+      res.status(401).json({
+        msg: 'Acceso denegado.'
+      })
+    }
+    
   } catch(error: any) {
     res
       .status(500)
@@ -82,16 +156,36 @@ async function add(req: Request, res: Response) {
 
 async function update(req: Request, res: Response) {
   try {
-    const id = Number.parseInt(req.params.id)
-    const project = em.getReference(Project, id)
+    const token = req.headers.authorization
+    
+    if (token) {
+      const { userIsAdmin } = decodeToken(token)
+      const id = Number.parseInt(req.params.id)
+      await em.findOneOrFail(Project, { id }) // Valido que el proyecto exista
 
-    em.assign(project, req.body)
+      if (userIsAdmin) {
+        const project = em.getReference(Project, id)
+    
+        em.assign(project, req.body)
+    
+        await em.flush()
+    
+        res
+          .status(200)
+          .json({ message: 'project updated', data: project})
+        
+      } else {
+        res.status(403).json({
+          message: 'No posee los permisos necesarios para modificar un proyecto.'
+        })
+      }
 
-    await em.flush()
+    } else {
+      res.status(401).json({
+        msg: 'Acceso denegado.'
+      })
+    }
 
-    res
-      .status(200)
-      .json({ message: 'project updated', data: project})
   } catch(error: any) {
     res
       .status(500)
@@ -101,14 +195,33 @@ async function update(req: Request, res: Response) {
 
 async function remove(req: Request, res: Response) {
   try {
-    const id = Number.parseInt(req.params.id)
-    const project = em.getReference(Project, id)
+    const token = req.headers.authorization
+    
+    if (token) {
+      const { userIsAdmin } = decodeToken(token)
+      const id = Number.parseInt(req.params.id)
+      await em.findOneOrFail(Project, { id }) // Valido que el proyecto exista
+      
+      if (userIsAdmin) {
+        const project = em.getReference(Project, id)
+    
+        await em.removeAndFlush(project)
+    
+        res
+          .status(204)
+          .json({ message: 'project removed', data: project})
+        
+      } else {
+        res.status(403).json({
+          message: 'No posee los permisos necesarios para eliminar un proyecto.'
+        })
+      }
 
-    await em.removeAndFlush(project)
-
-    res
-      .status(204)
-      .json({ message: 'project removed', data: project})
+    } else {
+      res.status(401).json({
+        msg: 'Acceso denegado.'
+      })
+    }
   } catch(error: any) {
     res
       .status(500)

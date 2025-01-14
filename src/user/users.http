@@ -1,3 +1,23 @@
+### Login 1
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "username": "Agus",
+  "password": "jose123"
+}
+
+### Login 2
+
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "username": "jor",
+  "password": "123"
+}
+
 ### obtener todos los users
 
 GET http://localhost:3000/api/users
@@ -12,14 +32,4 @@ Content-Type: application/json
   "username": "Mati",
   "password": "jose123",
   "is_admin": "0"
-}
-
-### Login
-
-POST http://localhost:3000/api/users/login
-Content-Type: application/json
-
-{
-  "username": "Agus",
-  "password": "jose123"
 }

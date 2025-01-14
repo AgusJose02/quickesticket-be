@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 
 export const validateToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers['authorization']
-  console.log(token)
 
   if(token != undefined) {
 
