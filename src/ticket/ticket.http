@@ -2,42 +2,46 @@
 ### obtener todos los ticket
 
 GET http://localhost:3000/api/tickets
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 ### obtener un ticket
 
-GET http://localhost:3000/api/tickets/73
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+GET http://localhost:3000/api/tickets/77
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 ### crear nuevo ticket
 
 POST http://localhost:3000/api/tickets
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 {
   "project": 1,
-  "creator": 1,
+  "creator": 4,
+  "responsible": 8,
   "beginning_date": "2025-01-13",
   "state": 4,
-  "title": "Ticket con jwt",
-  "description": "Este es el primer ticket creado con autenticación jwt"
+  "title": "Ticket con validación",
+  "description": "Este es el primer ticket creado con validación de pertenencia a proyecto"
 }
 
 ### modificar un ticket con PUT
 
-PUT http://localhost:3000/api/tickets/73
+PUT http://localhost:3000/api/tickets/82
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 {
-  "description": "Este es el primer ticket creado con autenticación jwt. Descripción modificada del ticket"
+  "state": 1
 }
 
 ### borrar un ticket
 
-DELETE http://localhost:3000/api/tickets/71
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+DELETE http://localhost:3000/api/tickets/81
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 ### obtener todos los ticket states
 

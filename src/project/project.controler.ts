@@ -55,12 +55,7 @@ async function findAll(req: Request, res: Response) {
         .status(200)
         .json(projects)
 
-    } else {
-      res.status(401).json({
-        msg: 'Acceso denegado.'
-      })   
     }
-
   } catch(error: any) {
     res
       .status(500)
@@ -105,12 +100,7 @@ async function findOne(req: Request, res: Response) {
       res
         .status(200)
         .json(project)
-    } else {
-      res.status(401).json({
-        msg: 'Acceso denegado.'
-      })
-    }
-    
+    }    
   } catch(error: any) {
     res
       .status(500)
@@ -141,12 +131,7 @@ async function add(req: Request, res: Response) {
         })
       }
 
-    } else {
-      res.status(401).json({
-        msg: 'Acceso denegado.'
-      })
-    }
-    
+    }    
   } catch(error: any) {
     res
       .status(500)
@@ -156,36 +141,17 @@ async function add(req: Request, res: Response) {
 
 async function update(req: Request, res: Response) {
   try {
-    const token = req.headers.authorization
-    
-    if (token) {
-      const { userIsAdmin } = decodeToken(token)
-      const id = Number.parseInt(req.params.id)
-      await em.findOneOrFail(Project, { id }) // Valido que el proyecto exista
+    const id = Number.parseInt(req.params.id)
+    const project = em.getReference(Project, id)
 
-      if (userIsAdmin) {
-        const project = em.getReference(Project, id)
-    
-        em.assign(project, req.body)
-    
-        await em.flush()
-    
-        res
-          .status(200)
-          .json({ message: 'project updated', data: project})
+    em.assign(project, req.body)
+
+    await em.flush()
+
+    res
+      .status(200)
+      .json({ message: 'project updated', data: project})
         
-      } else {
-        res.status(403).json({
-          message: 'No posee los permisos necesarios para modificar un proyecto.'
-        })
-      }
-
-    } else {
-      res.status(401).json({
-        msg: 'Acceso denegado.'
-      })
-    }
-
   } catch(error: any) {
     res
       .status(500)
@@ -217,10 +183,6 @@ async function remove(req: Request, res: Response) {
         })
       }
 
-    } else {
-      res.status(401).json({
-        msg: 'Acceso denegado.'
-      })
     }
   } catch(error: any) {
     res

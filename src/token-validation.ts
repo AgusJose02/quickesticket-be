@@ -17,7 +17,7 @@ export const validateToken = (req: Request, res: Response, next: NextFunction) =
 
   } else {
     res.status(401).json({
-      msg: 'Acceso denegado'
+      msg: 'Acceso denegado.'
     })
   }
 }
