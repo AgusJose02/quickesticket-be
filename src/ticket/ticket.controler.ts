@@ -59,27 +59,41 @@ async function findAll(req: Request, res: Response) {
 
 async function findOne(req: Request, res: Response) {
   try {
-    const id = Number.parseInt(req.params.id)
-    const ticket = await em.findOneOrFail(Ticket,
-      { id },
-      { populate: ['project', 'state', 'responsible', 'creator'],
-        fields: [
-          'project.name',
-          'creator.username',
-          'responsible.username',
-          'beginning_date',
-          'end_date',
-          'state',
-          'total_hours',
-          'title',
-          'description'
-        ]
-      }
-    )
+    const token = req.headers.authorization
 
-    res
-      .status(200)
-      .json(ticket)
+    if (token) {
+      const { userId, userIsAdmin } = decodeToken(token)
+      const id = Number.parseInt(req.params.id)
+
+      // Validaciones para no admins
+      if (await noAdminValidation(userIsAdmin, id, userId)) {
+        res.status(403).json({
+            message: 'No posee los permisos necesarios para acceder al ticket.'
+          })
+          return
+      }
+
+      const ticket = await em.findOneOrFail(Ticket,
+        { id },
+        { populate: ['project', 'state', 'responsible', 'creator'],
+          fields: [
+            'project.name',
+            'creator.username',
+            'responsible.username',
+            'beginning_date',
+            'end_date',
+            'state',
+            'total_hours',
+            'title',
+            'description'
+          ]
+        }
+      )
+  
+      res
+        .status(200)
+        .json(ticket)
+    }
   } catch(error: any) {
     res
       .status(500)
@@ -105,7 +119,7 @@ async function add(req: Request, res: Response) {
           await em.findOneOrFail(Project, { id: projectId, users: {id: userId} })
         } catch (error: any) {
           res.status(403).json({
-            message: 'No se puede crear un ticket sin poseer asignación a su proyecto.'
+            message: 'No posee los permisos necesarios para crear el ticket.'
           })
           return
         }
@@ -136,24 +150,11 @@ async function update(req: Request, res: Response) {
       const id = Number.parseInt(req.params.id)
       
       // Validaciones para no admins
-      if (!userIsAdmin) {
-        const project = await em.findOneOrFail(Project, { tickets: {id}})
-
-        // Valido que el proyecto exista
-        await em.findOneOrFail(Project, { id: project.id})
-
-        // Valido que el usuario esté asignado al proyecto o al ticket
-        try {
-          const validationProject = await em.findOne(Project, { id: project.id, users: {id: userId} })
-          const validationTicket = await em.findOne(Ticket, { id, responsible: {id: userId} })
-
-          if (validationProject == undefined && validationTicket == undefined) { throw Error }
-        } catch (error: any) {
-          res.status(403).json({
-            message: 'No se puede modificar un ticket sin poseer asignación al mismo o a su proyecto.'
+      if (await noAdminValidation(userIsAdmin, id, userId)) {
+        res.status(403).json({
+            message: 'No posee los permisos necesarios para modificar el ticket.'
           })
           return
-        }
       }
 
       const ticket = em.getReference(Ticket, id)
@@ -182,27 +183,13 @@ async function remove(req: Request, res: Response) {
       const id = Number.parseInt(req.params.id)
       
       // Validaciones para no admins
-      if (!userIsAdmin) {
-        const project = await em.findOneOrFail(Project, { tickets: {id}})
-
-        // Valido que el proyecto exista
-        await em.findOneOrFail(Project, { id: project.id})
-
-        // Valido que el usuario esté asignado al proyecto o al ticket
-        try {
-          const validationProject = await em.findOne(Project, { id: project.id, users: {id: userId} })
-          const validationTicket = await em.findOne(Ticket, { id, responsible: {id: userId} })
-
-          if (validationProject == undefined && validationTicket == undefined) { throw Error }
-
-        } catch (error: any) {
-          res.status(403).json({
-            message: 'No se puede eliminar un ticket sin poseer asignación al mismo o a su proyecto.'
+      if (await noAdminValidation(userIsAdmin, id, userId)) {
+        res.status(403).json({
+            message: 'No posee los permisos necesarios para eliminar el ticket.'
           })
           return
-        }
       }
-      
+
       const ticket = em.getReference(Ticket, id)
       await em.removeAndFlush(ticket)
   
@@ -215,6 +202,20 @@ async function remove(req: Request, res: Response) {
     res
       .status(500)
       .json({ message: error.message})
+  }
+}
+
+async function noAdminValidation(userIsAdmin: boolean, ticketId: number, userId: number) {
+  if (!userIsAdmin) {
+    // Valido que el proyecto exista
+    await em.findOneOrFail(Project, { tickets: {id: ticketId}})
+
+    // Valido que el usuario esté asignado al proyecto o al ticket
+    const validationProject = await em.findOne(Project, { tickets: {id: ticketId}, users: {id: userId} })
+    const validationTicket = await em.findOne(Ticket, { id: ticketId, responsible: {id: userId} })
+
+    if (validationProject == undefined && validationTicket == undefined) { return true }
+
   }
 }
 

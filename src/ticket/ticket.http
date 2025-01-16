@@ -7,7 +7,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJq
 
 ### obtener un ticket
 
-GET http://localhost:3000/api/tickets/77
+GET http://localhost:3000/api/tickets/65
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 # Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
@@ -15,8 +15,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJq
 
 POST http://localhost:3000/api/tickets
 Content-Type: application/json
-# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 {
   "project": 1,
@@ -40,7 +40,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJq
 
 ### borrar un ticket
 
-DELETE http://localhost:3000/api/tickets/81
+DELETE http://localhost:3000/api/tickets/74
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 ### obtener todos los ticket states

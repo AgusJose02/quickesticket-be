@@ -1,6 +1,7 @@
-import { DecimalType, Entity, ManyToOne, PrimaryKeyType, Property, Rel } from "@mikro-orm/core";
+import { Entity, ManyToOne, Property, Rel } from "@mikro-orm/core";
 import { BaseEntity } from "../../shared/base.entity.js";
 import { Ticket } from "../ticket.entity.js";
+import { User } from "../../user/user.entity.js";
 
 @Entity()
 export class DevotedTime extends BaseEntity {
@@ -19,4 +20,7 @@ export class DevotedTime extends BaseEntity {
 
   @Property({nullable: true, columnType: 'integer'}) //TODO: AVERIGUAR COMO MANEJAR DECIMALS PORQUE DEVUELVE STRINGS
   client_time_amount!: number
+
+  @ManyToOne(() => User, { nullable: false })
+  user!: Rel<User>
 }

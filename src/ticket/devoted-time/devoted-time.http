@@ -1,43 +1,45 @@
 ### obtener todos los tiempos
 
 GET http://localhost:3000/api/devoted-time
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 ### obtener todo el tiempo dedicado de un ticket 
 
-GET http://localhost:3000/api/tickets/61/devoted-time
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+GET http://localhost:3000/api/tickets/66/devoted-time
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 
 ### obtener tiempo dedicado
 
-GET http://localhost:3000/api/tickets/61/devoted-time/15
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+GET http://localhost:3000/api/tickets/64/devoted-time/32
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 
 ### crear nuevo tiempo dedicado
 
-POST http://localhost:3000/api/tickets/61/devoted-time
+POST http://localhost:3000/api/tickets/74/devoted-time
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 {
-  "ticket": 61,
-  "date": "2025-01-13T00:00:00",
-  "amount": 2
+  "date": "2025-01-12T00:00:00",
+  "amount": 2,
+  "user": 8
 }
 
 ### modificar tiempo dedicado
 
-PUT http://localhost:3000/api/tickets/61/devoted-time/23
+PUT http://localhost:3000/api/tickets/64/devoted-time/32
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 {
-  "description": "Nueva descripción para el ticket 23"
+  "description": "Nueva descripción para el ticket 35"
 }
 
 ### borrar tiempo dedicado
 
-DELETE http://localhost:3000/api/tickets/61/devoted-time/13
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFndXMiLCJpYXQiOjE3MzY3NzgxMTF9.0JoTq4p_cmCXerKIXQ9Ltt_4Fd28VvnaJYls0v-JbIA
+DELETE http://localhost:3000/api/tickets/82/devoted-time/33
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
