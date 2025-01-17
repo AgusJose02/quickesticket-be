@@ -142,10 +142,16 @@ async function add(req: Request, res: Response) {
           })
           return
       }
-      
+
+      // Actualizo cantidad total en el ticket
+      const ticket = em.getReference(Ticket, ticketId)
+      ticket.total_time += req.body.amount
+
+      // Creo nueva entrada      
       req.body.newField = 'ticket'
       req.body.ticket = ticketId
       const time = em.create(DevotedTime, req.body);
+
       await em.flush()
   
       res
@@ -175,15 +181,25 @@ async function update(req: Request, res: Response) {
           return
       }
       
-    const id = Number.parseInt(req.params.id)
-    const time = em.getReference(DevotedTime, id)
+      const id = Number.parseInt(req.params.id)
+      const newAmount = req.body.amount
+      
+      // Actualizo cantidad total en el ticket
+      if (newAmount) {
+        const ticket = em.getReference(Ticket, ticketId)
+        const actualTimeEntry = await em.findOneOrFail(DevotedTime, id)
+        ticket.total_time += (newAmount - actualTimeEntry.amount)
+      }
+      
+      // Actualizo la entrada
+      const time = em.getReference(DevotedTime, id)
+      em.assign(time, req.body)
+    
+      await em.flush()
 
-    em.assign(time, req.body)
-    await em.flush()
-
-    res
-      .status(200)
-      .json({ message: 'Devoted time updated', data: time})
+      res
+        .status(200)
+        .json({ message: 'Devoted time updated', data: time})
     }
   } catch(error: any) {
     res
@@ -207,8 +223,15 @@ async function remove(req: Request, res: Response) {
           })
           return
       }
-    
+      
       const id = Number.parseInt(req.params.id)
+
+      // Actualizo cantidad total en el ticket
+      const timeEntry = await em.findOneOrFail(DevotedTime, id)
+      const ticket = em.getReference(Ticket, ticketId)
+      ticket.total_time -= timeEntry.amount
+      
+      // Elimino la entrada      
       const time = em.getReference(DevotedTime, id)
 
       await em.removeAndFlush(time)

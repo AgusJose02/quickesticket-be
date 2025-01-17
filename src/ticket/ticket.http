@@ -7,7 +7,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJq
 
 ### obtener un ticket
 
-GET http://localhost:3000/api/tickets/65
+GET http://localhost:3000/api/tickets/83
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 # Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
@@ -19,23 +19,23 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJq
 # Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 {
-  "project": 1,
+  "project": 7,
   "creator": 4,
   "responsible": 8,
-  "beginning_date": "2025-01-13",
+  "beginning_date": "2025-01-17",
   "state": 4,
-  "title": "Ticket con validación",
-  "description": "Este es el primer ticket creado con validación de pertenencia a proyecto"
+  "title": "Implementación total_hours",
+  "description": "Este es el primer ticket creado con modificación de total_hours"
 }
 
 ### modificar un ticket con PUT
 
-PUT http://localhost:3000/api/tickets/82
+PUT http://localhost:3000/api/tickets/83
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 {
-  "state": 1
+  "total_time": 5
 }
 
 ### borrar un ticket

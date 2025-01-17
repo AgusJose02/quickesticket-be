@@ -26,7 +26,7 @@ export class Ticket extends BaseEntity {
   state!: Rel<TicketState>
 
   @Property({nullable: true})
-  total_hours!: number
+  total_time!: number
 
   @Property({nullable: false, columnType: 'varchar(75)'})
   title!: string

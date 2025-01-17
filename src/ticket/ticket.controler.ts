@@ -19,7 +19,7 @@ function sanitizeTicketInput(req: Request, res: Response, next: NextFunction){
     beginning_date: req.body.beginning_date,
     end_date: req.body.end_date,
     state: req.body.state,
-    total_hours: req.body.total_hours,
+    total_time: req.body.total_time,
     title: req.body.title,
     description: req.body.description,
   }
@@ -83,7 +83,7 @@ async function findOne(req: Request, res: Response) {
             'beginning_date',
             'end_date',
             'state',
-            'total_hours',
+            'total_time',
             'title',
             'description'
           ]
