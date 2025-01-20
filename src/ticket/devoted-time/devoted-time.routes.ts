@@ -27,7 +27,7 @@ devotedTimeRouter.get(
 
 // POST
 devotedTimeRouter.post(
-  '/:ticketId/devoted-time/',
+  '/:ticketId/devoted-time',
   validateToken,
   sanitizeDevotedTimeInput,
   add

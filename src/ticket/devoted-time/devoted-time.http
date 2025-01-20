@@ -19,13 +19,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJq
 
 ### crear nuevo tiempo dedicado
 
-POST http://localhost:3000/api/tickets/83/devoted-time
+POST http://localhost:3000/api/tickets/72/devoted-time
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 {
   "date": "2025-01-17T00:00:00",
-  "amount": 3,
+  "amount": 5,
   "user": 8
 }
 
@@ -36,7 +36,7 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 {
-  "amount": 10
+  "amount": 2
 }
 
 ### borrar tiempo dedicado

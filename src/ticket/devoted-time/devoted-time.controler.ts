@@ -6,6 +6,7 @@ import { decodeToken } from '../../token-decoder.js';
 import { Ticket } from '../ticket.entity.js';
 import { Project } from '../../project/project.entity.js';
 import { error } from 'console';
+import { populate } from 'dotenv';
 
 const em = entityManager;
 
@@ -145,6 +146,7 @@ async function add(req: Request, res: Response) {
 
       // Actualizo cantidad total en el ticket
       const ticket = em.getReference(Ticket, ticketId)
+      await em.refresh(ticket)
       ticket.total_time += req.body.amount
 
       // Creo nueva entrada      
@@ -187,6 +189,7 @@ async function update(req: Request, res: Response) {
       // Actualizo cantidad total en el ticket
       if (newAmount) {
         const ticket = em.getReference(Ticket, ticketId)
+        await em.refresh(ticket)
         const actualTimeEntry = await em.findOneOrFail(DevotedTime, id)
         ticket.total_time += (newAmount - actualTimeEntry.amount)
       }
@@ -229,6 +232,7 @@ async function remove(req: Request, res: Response) {
       // Actualizo cantidad total en el ticket
       const timeEntry = await em.findOneOrFail(DevotedTime, id)
       const ticket = em.getReference(Ticket, ticketId)
+      await em.refresh(ticket)
       ticket.total_time -= timeEntry.amount
       
       // Elimino la entrada      

@@ -131,7 +131,7 @@ async function add(req: Request, res: Response) {
       
       res
         .status(201)
-        .json({ticket})
+        .json(ticket)
     }
 
   } catch (error: any) {
@@ -158,8 +158,24 @@ async function update(req: Request, res: Response) {
       }
 
       const ticket = em.getReference(Ticket, id)
-      em.assign(ticket, req.body)
-  
+      em.assign(ticket, req.body, {mergeObjects: true})
+
+      // En los casos en los que se necesita nullear un campo
+      if (req.body.end_date !== undefined && req.body.end_date === null) {
+        await em.nativeUpdate(
+          Ticket,
+          { id },
+          { end_date: null }
+        )
+      }
+      if (req.body.responsible !== undefined && req.body.responsible === null) {
+        await em.nativeUpdate(
+          Ticket,
+          { id },
+          { responsible: null }
+        )
+      }
+        
       await em.flush()
   
       res

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 
 import { entityManager } from '../shared/db/orm.js'
 import { User } from  './user.entity.js'
+import { decodeToken } from '../token-decoder.js'
 
 
 const em = entityManager;
@@ -14,7 +15,10 @@ async function findAll(req: Request, res: Response) {
     const users = await em.find(
       User,
       {},
-      { populate: []}
+      { populate: [],
+        orderBy: {username: 'ASC'},
+        fields: ['id', 'username']
+      }
     )
 
     res
@@ -29,35 +33,48 @@ async function findAll(req: Request, res: Response) {
 
 
 async function add(req: Request, res: Response) {
-
-  const { username, password } = req.body
+  const token = req.headers.authorization
   
-  // Validación de la no existencia del usuario
-  const user = await em.findOne(User, { username: username })
+  if (token) {
+    const { userIsAdmin } = decodeToken(token)
 
-  if (user) {
-    return res.status(400).json({
-      msg: `El usuario ${username} ya existe.`
-    })
+    if (userIsAdmin) {
+      const { username, password } = req.body
+      
+      // Validación de la no existencia del usuario
+      const user = await em.findOne(User, { username: username })
+    
+      if (user) {
+        return res.status(400).json({
+          msg: `El usuario ${username} ya existe.`
+        })
+      }
+    
+      // Creación del usuario
+      try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = em.create(User, req.body)
+    
+        user.password = hashedPassword
+    
+        await em.flush()
+    
+        res
+          .status(201)
+          .json(user)
+        } catch(error: any) {
+        res
+          .status(500)
+          .json({ message: error.message})
+      }
+
+    } else {
+      res
+          .status(403)
+          .json('No posee los permisos necesarios para crear un usuario.')
+    }
   }
-
-  // Creación del usuario
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = em.create(User, req.body)
-
-    user.password = hashedPassword
-
-    await em.flush()
-
-    res
-      .status(201)
-      .json(user)
-    } catch(error: any) {
-    res
-      .status(500)
-      .json({ message: error.message})
-  }
+  
 }
 
 

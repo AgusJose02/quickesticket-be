@@ -27,9 +27,10 @@ GET http://localhost:3000/api/users
 
 POST http://localhost:3000/api/users
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
 {
-  "username": "Mati",
-  "password": "jose123",
+  "username": "Silvi",
+  "password": "123",
   "is_admin": "0"
 }
