@@ -7,6 +7,7 @@ export const orm = await MikroORM.init({
   entitiesTs: ['src/**/*.entity.ts'],
   dbName: 'quickesticket',
   type: 'mysql',
+  timezone: 'z',
   clientUrl: 'mysql://agus:agus@localhost:3307/quickesticket',
   highlighter: new SqlHighlighter(),
   debug: true,
