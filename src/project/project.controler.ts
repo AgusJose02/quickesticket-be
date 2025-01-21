@@ -78,7 +78,7 @@ async function findOne(req: Request, res: Response) {
         project = await em.findOneOrFail(
           Project,
           { id },
-          { populate: ['tickets', 'tickets.state']}
+          { populate: ['tickets', 'tickets.state', 'tickets.responsible']}
         )
         
       } else {
@@ -86,7 +86,7 @@ async function findOne(req: Request, res: Response) {
         project = await em.findOne(
           Project,
           { id, users: { id: userId } },
-          { populate: ['tickets', 'tickets.state'] }
+          { populate: ['tickets', 'tickets.state', 'tickets.responsible'] }
         );
         
         if (!project) {

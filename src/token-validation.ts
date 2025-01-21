@@ -11,13 +11,13 @@ export const validateToken = (req: Request, res: Response, next: NextFunction) =
       next()
     } catch(error: any) {
       res.status(401).json({
-        msg: 'Token inválido.'
+        message: 'Token inválido.'
       })
     }
 
   } else {
     res.status(401).json({
-      msg: 'Acceso denegado.'
+      message: 'Acceso denegado.'
     })
   }
 }

@@ -5,15 +5,10 @@ import { DevotedTime } from './devoted-time.entity.js'
 import { decodeToken } from '../../token-decoder.js';
 import { Ticket } from '../ticket.entity.js';
 import { Project } from '../../project/project.entity.js';
-import { error } from 'console';
-import { populate } from 'dotenv';
 
 const em = entityManager;
 
-const loader = entityLoader; // TODO: DELETE OR POPULATE DEVOTED TIME
-
 /// SANITIZE INPUT
-
 function sanitizeDevotedTimeInput(req: Request, res: Response, next: NextFunction){
 
   req.body.sanitizedInput = {
@@ -78,7 +73,7 @@ async function findTicketsDevotedTime(req: Request, res: Response) {
       const times = await em.find(
           DevotedTime,
           {ticket: {id: ticketId}},
-          { populate: [],
+          { populate: ['user'],
             orderBy: {date: 'DESC'}
           },
         )

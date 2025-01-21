@@ -46,7 +46,7 @@ async function add(req: Request, res: Response) {
     
       if (user) {
         return res.status(400).json({
-          msg: `El usuario ${username} ya existe.`
+          message: `El usuario ${username} ya existe.`
         })
       }
     
@@ -56,6 +56,7 @@ async function add(req: Request, res: Response) {
         const user = em.create(User, req.body)
     
         user.password = hashedPassword
+        user.username = user.username.toLowerCase()
     
         await em.flush()
     
@@ -87,7 +88,7 @@ async function login(req: Request, res: Response) {
 
   if(!user) {
     return res.status(400).json({
-      msg: `El usuario ${username} no existe.`
+      message: `El usuario ${username} no existe.`
     })
   }
 
@@ -96,7 +97,7 @@ async function login(req: Request, res: Response) {
   
   if(!isPasswordValid) {
     return res.status(400).json({
-      msg: `Contraseña incorrecta.`
+      message: `Contraseña incorrecta.`
     })
   }
 
