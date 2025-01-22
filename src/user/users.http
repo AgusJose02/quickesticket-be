@@ -18,9 +18,16 @@ Content-Type: application/json
   "password": "123"
 }
 
+### obtener un user
+
+GET http://localhost:3000/api/users/18
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM3NTUzMjA1fQ._K32f8FVVUGzsImQHY7xWw58FxDaD88JOfU02LBkY44
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+
 ### obtener todos los users
 
 GET http://localhost:3000/api/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 
 
 ### crear nuevo user
@@ -34,3 +41,25 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJB
   "password": "123",
   "is_admin": "0"
 }
+
+### Modificiar un user
+
+PUT http://localhost:3000/api/users/18
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
+
+{
+  "password": "1234"
+}
+
+### borrar un ticket
+
+DELETE http://localhost:3000/api/users/20
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM3NTUzMjA1fQ._K32f8FVVUGzsImQHY7xWw58FxDaD88JOfU02LBkY44
+
+
+### obtener wt
+
+GET http://localhost:3000/api/users/devoted-time?year=2025&month=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM3NTUzMjA1fQ._K32f8FVVUGzsImQHY7xWw58FxDaD88JOfU02LBkY44
+

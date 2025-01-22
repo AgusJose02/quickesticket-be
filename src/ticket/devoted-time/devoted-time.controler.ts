@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 
-import { entityManager, entityLoader } from '../../shared/db/orm.js'
+import { entityManager } from '../../shared/db/orm.js'
 import { DevotedTime } from './devoted-time.entity.js'
 import { decodeToken } from '../../token-decoder.js';
 import { Ticket } from '../ticket.entity.js';

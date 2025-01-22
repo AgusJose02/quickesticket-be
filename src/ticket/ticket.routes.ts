@@ -38,5 +38,4 @@ ticketRouter.delete(
   '/:id',
   validateToken,
   remove
-
 ) // TODO: INCLUIR SANITIZED
