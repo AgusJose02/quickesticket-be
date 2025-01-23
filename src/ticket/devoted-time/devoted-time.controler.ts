@@ -54,6 +54,41 @@ async function findAll(req: Request, res: Response) {
   }
 }
 
+async function findAllFromUser(req: Request, res: Response) {
+  try {
+    const token = req.headers.authorization
+
+    if (token) {
+      const { userIsAdmin } = decodeToken(token)
+
+      if (userIsAdmin) {
+        const id = Number.parseInt(req.params.id)
+
+        const entries = await em.find(
+          DevotedTime,
+          {user: {id}},
+          { populate: [],
+            orderBy: {date: 'DESC'}
+          },
+        )
+  
+        res
+          .status(200)
+          .json(entries)
+      } else {
+      res
+        .status(403)
+        .json('No posee los permisos necesarios para acceder.')
+      } 
+    }
+      
+  } catch(error: any) {
+    res
+      .status(500)
+      .json({ message: error.message})
+  }
+}
+
 async function findTicketsDevotedTime(req: Request, res: Response) {
   try {
     const token = req.headers.authorization
@@ -260,4 +295,4 @@ async function noAdminValidation(userIsAdmin: boolean, ticketId: number, userId:
   }
 }
 
-export {sanitizeDevotedTimeInput, findAll, findTicketsDevotedTime, findOne, add, update, remove}
+export {sanitizeDevotedTimeInput, findAll, findAllFromUser, findTicketsDevotedTime, findOne, add, update, remove}

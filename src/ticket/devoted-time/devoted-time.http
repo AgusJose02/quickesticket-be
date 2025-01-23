@@ -4,6 +4,12 @@ GET http://localhost:3000/api/devoted-time
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
 # Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
 
+### obtener todos los tiempos
+
+GET http://localhost:3000/api/devoted-time/user/4
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqb3IiLCJpc0FkbWluIjowLCJpYXQiOjE3MzY4NjQ1MDZ9.YtASJaAW-ST5M16zURsGCEV-qHm7qewycE_VqfNtsqI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM2ODY1NTI3fQ.CSybUj7b4pzzdLVS4uQXBW1pxg0YJFLpgWKVcS2jS_M
+
 ### obtener todo el tiempo dedicado de un ticket 
 
 GET http://localhost:3000/api/tickets/83/devoted-time

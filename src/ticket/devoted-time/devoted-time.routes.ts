@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sanitizeDevotedTimeInput, findAll, findTicketsDevotedTime, findOne, add, update, remove } from "./devoted-time.controler.js";
+import { sanitizeDevotedTimeInput, findAll, findTicketsDevotedTime, findOne, add, update, remove, findAllFromUser } from "./devoted-time.controler.js";
 import { validateToken } from "../../token-validation.js";
 
 export const devotedTimeRouter = Router()
@@ -9,6 +9,13 @@ devotedTimeRouter.get(
   '/',
   validateToken,
   findAll
+)
+
+/// GET ALL
+devotedTimeRouter.get(
+  '/user/:id',
+  validateToken,
+  findAllFromUser
 )
 
 // GET ALL FROM ONE TICKET

@@ -12,15 +12,15 @@ export class DevotedTime extends BaseEntity {
   @Property({nullable: false, columnType: 'date'})
   date!: Date
 
-  @Property({nullable: false, columnType: 'integer'}) //TODO: AVERIGUAR COMO MANEJAR DECIMALS PORQUE DEVUELVE STRINGS
+  @Property({nullable: false, columnType: 'integer'})
   amount!: number
 
   @Property({nullable: true, columnType: 'varchar(75)'})
   description!: string
 
-  @Property({nullable: true, columnType: 'integer'}) //TODO: AVERIGUAR COMO MANEJAR DECIMALS PORQUE DEVUELVE STRINGS
+  @Property({nullable: true, columnType: 'integer'})
   client_time_amount!: number
 
-  @ManyToOne(() => User, { nullable: false })
+  @ManyToOne(() => User, { nullable: false, onDelete: 'restrict' })
   user!: Rel<User>
 }
