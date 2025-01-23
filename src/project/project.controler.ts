@@ -3,6 +3,7 @@ import { entityManager } from '../shared/db/orm.js'
 
 import { Project } from './project.entity.js'
 import { decodeToken } from '../token-decoder.js';
+import { User } from '../user/user.entity.js';
 
 
 const em = entityManager;
@@ -191,4 +192,94 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { sanitizeProjectInput, findAll, findOne, add, update, remove }
+
+async function findAssignedUsers(req: Request, res: Response) {
+  try {
+    const token = req.headers.authorization
+    
+    if (token) {
+      const { userIsAdmin } = decodeToken(token)
+      
+      if (userIsAdmin) {
+        const id = Number.parseInt(req.params.id)
+        
+        // Valido que exista el proyecto
+        await em.findOneOrFail(Project, { id })
+
+        const results = await em.getConnection()
+          .execute(`
+            SELECT u.id, u.username, 
+              COALESCE(pu.project_id IS NOT NULL, false) AS assigned
+            FROM user u
+            LEFT JOIN project_users pu
+              ON u.id = pu.user_id
+              AND pu.project_id = ?
+            ORDER BY u.username ASC
+          `, [id]);
+
+        res
+          .status(200)
+          .json(results)
+
+      } else {
+        res.status(403).json({
+          message: 'No posee los permisos necesarios.'
+        })
+      }
+
+    }
+  } catch(error: any) {
+    res
+      .status(500)
+      .json({ message: error.message})
+  }
+}
+
+
+async function addUserAssigment (req: Request, res: Response) {
+  try {
+    const token = req.headers.authorization
+    
+    if (token) {
+      const { userIsAdmin } = decodeToken(token)
+      
+      if (userIsAdmin) {
+        const id = Number.parseInt(req.params.id)
+        const { userIds } = req.body
+
+        console.log(req.body, userIds)
+        
+        // Valido que exista el proyecto
+        const project = await em.findOneOrFail(Project, { id })
+        const users = await em.find(User, { id: { $in: userIds } });
+
+        if (users.length !== userIds.length) {
+          res
+            .status(400)
+            .json({ message: 'Uno o más usuarios no existen.' });
+          return
+        }
+
+        project.users.set(users)
+        await em.flush()        
+
+        res
+          .status(200)
+          .json({ message: 'Usuarios asignados correctamente.'})
+
+      } else {
+        res.status(403).json({
+          message: 'No posee los permisos necesarios.'
+        })
+      }
+
+    }
+  } catch(error: any) {
+    res
+      .status(500)
+      .json({ message: error.message})
+  }
+}
+
+
+export { sanitizeProjectInput, findAll, findOne, add, update, remove, findAssignedUsers, addUserAssigment }

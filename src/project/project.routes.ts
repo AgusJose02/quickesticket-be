@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sanitizeProjectInput, findAll, findOne, add, update, remove  } from "./project.controler.js";
+import { sanitizeProjectInput, findAll, findOne, add, update, remove, findAssignedUsers, addUserAssigment  } from "./project.controler.js";
 import { validateToken } from "../token-validation.js";
 
 export const projectRouter = Router()
@@ -47,3 +47,16 @@ projectRouter.delete(
   validateToken,
   remove
 )
+
+/// GET ASSIGNED USERS
+projectRouter.get(
+  '/:id/assigned-users',
+  validateToken,
+  findAssignedUsers
+)
+
+/// PUT USER ASSIGMENT
+projectRouter.put(
+  '/:id/assign-users',
+  validateToken,
+  addUserAssigment)
