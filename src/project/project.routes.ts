@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sanitizeProjectInput, findAll, findOne, add, update, remove, findAssignedUsers, addUserAssigment  } from "./project.controler.js";
+import { sanitizeProjectInput, findAll, findOne, add, update, remove, findAssignedUsers, addUserAssigment, findProjectsDevotedTime  } from "./project.controler.js";
 import { validateToken } from "../token-validation.js";
 
 export const projectRouter = Router()
@@ -9,6 +9,13 @@ projectRouter.get(
   '/',
   validateToken,
   findAll
+)  
+
+/// GET PROJECTS DEVOTED TIME
+projectRouter.get(
+  '/devoted-time',
+  validateToken,
+  findProjectsDevotedTime
 )
 
 /// GET ONE

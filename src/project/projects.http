@@ -78,6 +78,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJB
   "userIds": [4, 8, 13, 18]
 }
 
+### obtener dt
+
+GET http://localhost:3000/api/projects/devoted-time?year=2025&month=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZ3VzIiwiaXNBZG1pbiI6MSwiaWF0IjoxNzM3NTUzMjA1fQ._K32f8FVVUGzsImQHY7xWw58FxDaD88JOfU02LBkY44
+
+
 ### dirección inexistente
 
 GET http://localhost:3000/api/projectss

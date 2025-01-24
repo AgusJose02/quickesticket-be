@@ -18,6 +18,10 @@ export class Project extends BaseEntity {
   @Property({nullable: false, columnType: 'date'})
   creation_date!: Date
 
+  // Es una implementación básica. Lo ideal sería tener una tabla para poder ira actualizando los valores segun la fecha
+  @Property({nullable: false, columnType: 'decimal(10, 2)'})
+  hourly_rate!: number
+
   @OneToMany(() => Ticket, (ticket) => ticket.project,
     { cascade: [Cascade.ALL] }
   )

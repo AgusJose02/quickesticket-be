@@ -282,4 +282,61 @@ async function addUserAssigment (req: Request, res: Response) {
 }
 
 
-export { sanitizeProjectInput, findAll, findOne, add, update, remove, findAssignedUsers, addUserAssigment }
+async function findProjectsDevotedTime(req: Request, res: Response) {
+  const token = req.headers.authorization
+  
+  if (token) {
+    const { userIsAdmin } = decodeToken(token)
+
+    if (userIsAdmin) {
+      try {
+        const { month, year } = req.query;
+    
+        if (!month || !year) {
+          res
+            .status(400)
+            .json({ message: "Debe especificar mes y año." });
+          return
+        }
+    
+        // Valido mes y año
+        const parsedMonth = parseInt(month as string);
+        const parsedYear = parseInt(year as string);
+        if (isNaN(parsedMonth) || isNaN(parsedYear) || parsedMonth < 1 || parsedMonth > 12) {
+          return res.status(400).json({ message: "Mes o año inválido." });
+        }
+    
+        const results = await em.getConnection()
+          .execute(`
+            SELECT p.id, p.name, p.hourly_rate,
+              COALESCE(SUM(dt.amount), 0) AS total_time
+            FROM project p
+            LEFT JOIN ticket t
+              ON p.id = t.project_id
+            LEFT JOIN devoted_time dt
+              ON t.id = dt.ticket_id
+              AND YEAR(dt.date) = ?
+              AND MONTH(dt.date) = ?
+            GROUP BY p.id, p.name, p.hourly_rate
+            ORDER BY p.name ASC
+          `, [year, month]);
+    
+        res
+          .status(200)
+          .json(results);
+      } catch(error: any) {
+        res
+          .status(500)
+          .json({ message: error.message})
+      }
+    } else {
+      res
+        .status(403)
+        .json('No posee los permisos necesarios para acceder.')
+    }
+  }
+
+}
+
+
+export { sanitizeProjectInput, findAll, findOne, add, update, remove, findAssignedUsers, addUserAssigment, findProjectsDevotedTime }
