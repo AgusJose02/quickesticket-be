@@ -28,6 +28,7 @@ function sanitizeDevotedTimeInput(req: Request, res: Response, next: NextFunctio
   next()
 }
 
+
 async function findAll(req: Request, res: Response) {
   try {
     const token = req.headers.authorization
@@ -53,6 +54,46 @@ async function findAll(req: Request, res: Response) {
       .json({ message: error.message})
   }
 }
+
+
+async function findAllFromLastWeek(req: Request, res: Response) {
+  try {
+    const token = req.headers.authorization
+    const today = new Date
+    const lastWeekDate = new Date
+
+    today.setHours(0,0,0,0)
+    lastWeekDate.setHours(0,0,0,0)
+    lastWeekDate.setDate(today.getDate() - 7)
+    
+    if (token) {
+      const { userId } = decodeToken(token)
+      
+      const entries = await em.find(
+        DevotedTime,
+        {
+          user: { id: userId },
+          date: { 
+            $gte: lastWeekDate.toISOString(),
+            $lte: today.toISOString()
+          }
+        },
+        { populate: ['ticket'],
+          orderBy: {date: 'DESC'}
+        },
+      )
+
+      res
+        .status(200)
+        .json(entries)
+    }
+  } catch(error: any) {
+    res
+      .status(500)
+      .json({ message: error.message})
+  }
+}
+
 
 async function findAllFromUser(req: Request, res: Response) {
   try {
@@ -88,6 +129,7 @@ async function findAllFromUser(req: Request, res: Response) {
       .json({ message: error.message})
   }
 }
+
 
 async function findTicketsDevotedTime(req: Request, res: Response) {
   try {
@@ -125,6 +167,7 @@ async function findTicketsDevotedTime(req: Request, res: Response) {
   }
 }
 
+
 async function findOne(req: Request, res: Response) {
   try {
     const token = req.headers.authorization
@@ -157,6 +200,7 @@ async function findOne(req: Request, res: Response) {
       .json({ message: error.message})
   }
 }
+
 
 async function add(req: Request, res: Response) {
   try {
@@ -196,6 +240,7 @@ async function add(req: Request, res: Response) {
       .json({ message: error.message })
   }
 }
+
 
 async function update(req: Request, res: Response) {
   try {
@@ -241,6 +286,7 @@ async function update(req: Request, res: Response) {
   }
 }
 
+
 async function remove(req: Request, res: Response) {
   try {
     const token = req.headers.authorization
@@ -281,6 +327,7 @@ async function remove(req: Request, res: Response) {
   }
 }
 
+
 async function noAdminValidation(userIsAdmin: boolean, ticketId: number, userId: number) {
   if (!userIsAdmin) {
     // Valido que el ticket exista
@@ -295,4 +342,5 @@ async function noAdminValidation(userIsAdmin: boolean, ticketId: number, userId:
   }
 }
 
-export {sanitizeDevotedTimeInput, findAll, findAllFromUser, findTicketsDevotedTime, findOne, add, update, remove}
+
+export {sanitizeDevotedTimeInput, findAll, findAllFromLastWeek, findAllFromUser, findTicketsDevotedTime, findOne, add, update, remove}

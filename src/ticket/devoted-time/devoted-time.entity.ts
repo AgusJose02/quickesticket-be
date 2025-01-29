@@ -18,7 +18,7 @@ export class DevotedTime extends BaseEntity {
   @Property({nullable: true, columnType: 'varchar(75)'})
   description!: string
 
-  @Property({nullable: true, columnType: 'integer'})
+  @Property({nullable: false, columnType: 'integer'})
   client_time_amount!: number
 
   @ManyToOne(() => User, { nullable: false, onDelete: 'restrict' })

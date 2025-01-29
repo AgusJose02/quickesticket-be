@@ -309,7 +309,7 @@ async function findProjectsDevotedTime(req: Request, res: Response) {
         const results = await em.getConnection()
           .execute(`
             SELECT p.id, p.name, p.hourly_rate,
-              COALESCE(SUM(dt.amount), 0) AS total_time
+              COALESCE(SUM(dt.client_time_amount), 0) AS total_time
             FROM project p
             LEFT JOIN ticket t
               ON p.id = t.project_id
