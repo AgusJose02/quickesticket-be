@@ -5,8 +5,8 @@ import { SqlHighlighter } from "@mikro-orm/sql-highlighter";
 export const orm = await MikroORM.init({
   entities: ['dist/**/*.entity.js'],
   entitiesTs: ['src/**/*.entity.ts'],
-  dbName: 'quickesticket',
-  type: 'mysql',
+  dbName: 'quickesticket', // No va al deployear
+  type: 'mysql', // No va al deployear
   timezone: 'z',
   clientUrl: 'mysql://agus:agus@localhost:3307/quickesticket',
   highlighter: new SqlHighlighter(),
