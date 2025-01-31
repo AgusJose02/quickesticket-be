@@ -1,6 +1,11 @@
 import { MikroORM, EntityLoader } from "@mikro-orm/core";
 import { EntityManager } from "@mikro-orm/mysql";
 import { SqlHighlighter } from "@mikro-orm/sql-highlighter";
+import dotenv from 'dotenv'
+
+// configuracion dotenv
+dotenv.config()
+
 
 export const orm = await MikroORM.init({
   entities: ['dist/**/*.entity.js'],
@@ -8,7 +13,7 @@ export const orm = await MikroORM.init({
   dbName: 'quickesticket', // No va al deployear
   type: 'mysql', // No va al deployear
   timezone: 'z',
-  clientUrl: 'mysql://agus:agus@localhost:3307/quickesticket',
+  clientUrl: process.env.CLIENTURL,
   highlighter: new SqlHighlighter(),
   debug: true,
   allowGlobalContext: true,
