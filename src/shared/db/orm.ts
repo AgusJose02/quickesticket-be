@@ -10,10 +10,10 @@ dotenv.config()
 export const orm = await MikroORM.init({
   entities: ['dist/**/*.entity.js'],
   entitiesTs: ['src/**/*.entity.ts'],
-  dbName: 'quickesticket', // No va al deployear
+  dbName: process.env.MYSQL_DATABASE, // No va al deployear
   type: 'mysql', // No va al deployear
   timezone: 'z',
-  clientUrl: process.env.CLIENTURL,
+  clientUrl: process.env.MYSQL_URL,
   highlighter: new SqlHighlighter(),
   debug: true,
   allowGlobalContext: true,
